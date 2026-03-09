@@ -1,5 +1,7 @@
 # Redmine Gitlab Adapter Plugin
 
+This repository is a fork of the original project and has been modified to support Redmine 6.0.
+
 For Redmine 6.0.x.
 
 ### Plugin installation
