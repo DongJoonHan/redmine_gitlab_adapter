@@ -1,4 +1,11 @@
 module GitlabRepositoriesHelperPatch
+  def repository_field_tags(form, repository)
+    if repository && repository.scm_name.to_s.casecmp('Gitlab').zero?
+      return gitlab_field_tags(form, repository)
+    end
+    super
+  end
+
   def gitlab_field_tags(form, repository)
     content_tag('p', form.text_field(:url, :size => 60, :required => true,
                      :disabled => !repository.safe_attribute?('url')) +
