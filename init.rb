@@ -15,4 +15,7 @@ Rails.configuration.to_prepare do
   if defined?(RepositoriesHelper) && !RepositoriesHelper.ancestors.include?(GitlabRepositoriesHelperPatch)
     RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
   end
+  if defined?(ApplicationController)
+    ApplicationController.helper(GitlabRepositoriesHelperPatch)
+  end
 end
