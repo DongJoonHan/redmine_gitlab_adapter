@@ -12,6 +12,12 @@ Redmine::Plugin.register :redmine_gitlab_adapter do
 end
 
 Rails.configuration.to_prepare do
+  begin
+    require_dependency 'repositories_helper'
+  rescue LoadError
+    # RepositoriesHelper may be loaded later; guard clauses below will skip patching safely.
+  end
+
   if defined?(RepositoriesHelper) && !RepositoriesHelper.ancestors.include?(GitlabRepositoriesHelperPatch)
     RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
   end

@@ -1,6 +1,13 @@
 module GitlabRepositoriesHelperPatch
   def repository_field_tags(form, repository)
-    if repository && repository.scm_name.to_s.casecmp('Gitlab').zero?
+    if gitlab_repository?(repository)
+      return gitlab_field_tags(form, repository)
+    end
+    super
+  end
+
+  def scm_field_tags(form, repository)
+    if gitlab_repository?(repository)
       return gitlab_field_tags(form, repository)
     end
     super
@@ -32,6 +39,10 @@ module GitlabRepositoriesHelperPatch
     gitlab_field_tags(form, repository)
   end
 
+  def gitlab_repository_field_tags(form, repository)
+    gitlab_field_tags(form, repository)
+  end
+
   def gitlab_root_url_tag
     text = l("text_gitlab_root_url_note", :default => '')
     if text.present?
@@ -39,5 +50,12 @@ module GitlabRepositoriesHelperPatch
     else
       ''
     end
+  end
+
+  private
+
+  def gitlab_repository?(repository)
+    return false if repository.nil?
+    repository.scm_name.to_s.casecmp('Gitlab').zero? || repository.scm.to_s.casecmp('Gitlab').zero?
   end
 end
