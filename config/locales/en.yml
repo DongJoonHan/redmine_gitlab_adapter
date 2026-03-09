@@ -4,3 +4,4 @@ en:
   text_gitlab_repository_note: "Examples: https://<gitlab.url>/<group>/<project>.git, https://<gitlab.url>/<context_path>/<group>/<project>.git"
   field_root_url: "Root URL"
   text_gitlab_root_url_note: "Examples: https://<gitlab.url>, https://<gitlab.url>/<context_path>"
+  text_github_root_url_note: "Optional. Examples: https://github.com, https://ghe.example.com, https://ghe.example.com/context_path"
