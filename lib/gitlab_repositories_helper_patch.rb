@@ -16,6 +16,15 @@ module GitlabRepositoriesHelperPatch
                          ))
   end
 
+  # Compatibility aliases for Redmine versions that resolve SCM helper names differently.
+  def gitlab_fields(form, repository)
+    gitlab_field_tags(form, repository)
+  end
+
+  def repository_gitlab_field_tags(form, repository)
+    gitlab_field_tags(form, repository)
+  end
+
   def gitlab_root_url_tag
     text = l("text_gitlab_root_url_note", :default => '')
     if text.present?
