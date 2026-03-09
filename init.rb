@@ -12,7 +12,8 @@ Redmine::Plugin.register :redmine_gitlab_adapter do
 end
 
 Rails.configuration.to_prepare do
-  unless RepositoriesHelper.included_modules.include?(GitlabRepositoriesHelperPatch)
+  require_dependency 'repositories_helper'
+  unless RepositoriesHelper.ancestors.include?(GitlabRepositoriesHelperPatch)
     RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
   end
 end
