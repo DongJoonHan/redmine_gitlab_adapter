@@ -11,20 +11,34 @@ Redmine::Plugin.register :redmine_gitlab_adapter do
   Redmine::Scm::Base.add "Gitlab"
 end
 
-Rails.configuration.to_prepare do
-  begin
-    require_dependency 'repositories_helper'
-  rescue LoadError
-    # RepositoriesHelper may be loaded later; guard clauses below will skip patching safely.
-  end
+module RedmineGitlabAdapter
+  module_function
 
-  if defined?(RepositoriesHelper) && !RepositoriesHelper.ancestors.include?(GitlabRepositoriesHelperPatch)
-    RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
+  def apply_helper_patch
+    begin
+      require_dependency 'repositories_helper'
+    rescue LoadError
+      # Guarded below.
+    end
+
+    if defined?(RepositoriesHelper) && !RepositoriesHelper.ancestors.include?(GitlabRepositoriesHelperPatch)
+      RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
+    end
+
+    if defined?(ApplicationController)
+      ApplicationController.helper(GitlabRepositoriesHelperPatch)
+    end
+
+    if defined?(RepositoriesController)
+      RepositoriesController.helper(GitlabRepositoriesHelperPatch)
+    end
   end
-  if defined?(ApplicationController)
-    ApplicationController.helper(GitlabRepositoriesHelperPatch)
-  end
-  if defined?(RepositoriesController)
-    RepositoriesController.helper(GitlabRepositoriesHelperPatch)
-  end
+end
+
+Rails.application.config.after_initialize do
+  RedmineGitlabAdapter.apply_helper_patch
+end
+
+Rails.configuration.to_prepare do
+  RedmineGitlabAdapter.apply_helper_patch
 end
