@@ -1,6 +1,5 @@
 require 'redmine/scm/adapters/abstract_adapter'
 require 'uri'
-require 'no_proxy_fix'
 
 module Redmine
   module Scm
@@ -47,6 +46,8 @@ module Redmine
 
         def initialize(url, root_url=nil, login=nil, password=nil, path_encoding=nil)
           super
+
+          root_url = root_url.to_s.chomp('/')
 
           ## Get gitlab project
           @project = url.sub(root_url, '').sub(/^\//, '').sub(/\.git$/, '')
@@ -107,7 +108,7 @@ module Redmine
 
           (
             branches.detect(&:is_default) ||
-            branches.detect {|b| GIT_DEFAULT_BRANCH_NAMES.include?(b.to_s)} ||
+            branches.detect {|b| GITLAB_DEFAULT_BRANCH_NAMES.include?(b.to_s)} ||
             branches.first
           ).to_s
         end

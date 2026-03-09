@@ -1,5 +1,5 @@
 require 'redmine'
-require 'gitlab_repositories_helper_patch'
+require_relative 'lib/gitlab_repositories_helper_patch'
 
 Redmine::Plugin.register :redmine_gitlab_adapter do
   name 'Redmine Gitlab Adapter plugin'
@@ -9,4 +9,10 @@ Redmine::Plugin.register :redmine_gitlab_adapter do
   url 'https://www.future.co.jp'
   author_url 'https://www.future.co.jp'
   Redmine::Scm::Base.add "Gitlab"
+end
+
+Rails.configuration.to_prepare do
+  unless RepositoriesHelper.included_modules.include?(GitlabRepositoriesHelperPatch)
+    RepositoriesHelper.prepend(GitlabRepositoriesHelperPatch)
+  end
 end

@@ -10,7 +10,7 @@ class Repository::Gitlab < Repository
 
   def validate_root_url
     unless root_url.blank?
-      errors.add(:base, l(:field_root_url) + ' ' + l('activerecord.errors.messages.invalid')) unless url.start_with?(root_url)
+      errors.add(:base, l(:field_root_url) + ' ' + l('activerecord.errors.messages.invalid')) unless url.to_s.start_with?(root_url)
     end
   end
 
@@ -20,7 +20,7 @@ class Repository::Gitlab < Repository
       uri.path = ''
       self.root_url = uri.to_s
     end
-    self.root_url = self.root_url.chomp('/')
+    self.root_url = self.root_url.to_s.chomp('/')
   end
 
   def self.scm_adapter_class
