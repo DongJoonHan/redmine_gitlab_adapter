@@ -17,12 +17,9 @@ module GitlabRepositoriesHelperPatch
     content_tag('p', form.text_field(:url, :size => 60, :required => true,
                      :disabled => !repository.safe_attribute?('url')) +
     scm_path_info_tag(repository)) +
-    content_tag('p', form.password_field(
-                        :password, :size => 60, :name => 'ignore',
-                        :label => 'API Token', :required => true,
-                        :value => ((repository.new_record? || repository.password.blank?) ? '' : ('x' * 15)),
-                        :onfocus => "this.value=''; this.name='repository[password]';",
-                        :onchange => "this.name='repository[password]';")) +
+    content_tag('p', api_token_field(
+                        form, repository,
+                        :label_gitlab_api_token, 'GitLab API Token')) +
     content_tag('p', form.text_field(:root_url, :size => 60) + gitlab_root_url_tag) +
     content_tag('p', form.check_box(
                         :report_last_commit,
@@ -47,12 +44,9 @@ module GitlabRepositoriesHelperPatch
     content_tag('p', form.text_field(:url, :size => 60, :required => true,
                      :disabled => !repository.safe_attribute?('url')) +
     scm_path_info_tag(repository)) +
-    content_tag('p', form.password_field(
-                        :password, :size => 60, :name => 'ignore',
-                        :label => 'API Token', :required => true,
-                        :value => ((repository.new_record? || repository.password.blank?) ? '' : ('x' * 15)),
-                        :onfocus => "this.value=''; this.name='repository[password]';",
-                        :onchange => "this.name='repository[password]';")) +
+    content_tag('p', api_token_field(
+                        form, repository,
+                        :label_github_api_token, 'GitHub API Token')) +
     content_tag('p', form.text_field(:root_url, :size => 60) + github_root_url_tag) +
     content_tag('p', form.check_box(
                         :report_last_commit,
@@ -92,6 +86,16 @@ module GitlabRepositoriesHelperPatch
   end
 
   private
+
+  def api_token_field(form, repository, label_key, default_label)
+    form.password_field(
+      :password, :size => 60, :name => 'ignore',
+      :label => l(label_key, :default => default_label), :required => true,
+      :value => ((repository.new_record? || repository.password.blank?) ? '' : ('x' * 15)),
+      :onfocus => "this.value=''; this.name='repository[password]';",
+      :onchange => "this.name='repository[password]';"
+    )
+  end
 
   def gitlab_repository?(repository)
     return false if repository.nil?

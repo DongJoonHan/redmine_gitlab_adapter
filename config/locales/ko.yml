@@ -1,0 +1,9 @@
+# Korean strings
+ko:
+  text_gitlab_repository_note: "예시: https://<gitlab.url>/<group>/<project>.git, https://<gitlab.url>/<context_path>/<group>/<project>.git"
+  text_github_repository_note: "예시: https://github.com/<owner>/<repo>.git, https://<ghe.url>/<owner>/<repo>.git"
+  field_root_url: "루트 URL"
+  text_gitlab_root_url_note: "예시: https://<gitlab.url>, https://<gitlab.url>/<context_path>"
+  text_github_root_url_note: "선택 입력. 예시: https://github.com, https://ghe.example.com, https://ghe.example.com/context_path"
+  label_gitlab_api_token: "GitLab API 토큰"
+  label_github_api_token: "GitHub API 토큰"

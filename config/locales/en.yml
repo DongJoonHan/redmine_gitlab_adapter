@@ -2,6 +2,9 @@
 en:
   # my_label: "My label"
   text_gitlab_repository_note: "Examples: https://<gitlab.url>/<group>/<project>.git, https://<gitlab.url>/<context_path>/<group>/<project>.git"
+  text_github_repository_note: "Examples: https://github.com/<owner>/<repo>.git, https://<ghe.url>/<owner>/<repo>.git"
   field_root_url: "Root URL"
   text_gitlab_root_url_note: "Examples: https://<gitlab.url>, https://<gitlab.url>/<context_path>"
   text_github_root_url_note: "Optional. Examples: https://github.com, https://ghe.example.com, https://ghe.example.com/context_path"
+  label_gitlab_api_token: "GitLab API Token"
+  label_github_api_token: "GitHub API Token"
