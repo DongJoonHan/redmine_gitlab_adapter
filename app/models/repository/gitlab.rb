@@ -1,4 +1,4 @@
-require 'redmine/scm/adapters/gitlab_adapter'
+require_relative '../../../lib/redmine/scm/adapters/gitlab_adapter'
 
 class Repository::Gitlab < Repository
   validates_presence_of :url, :password
