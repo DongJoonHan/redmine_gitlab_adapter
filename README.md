@@ -53,12 +53,16 @@ Redmine 6.0.x에서 사용합니다.
 
 1.  플러그인 디렉터리를 `$REDMINE_ROOT/plugins` 디렉터리에 복사합니다.
     플러그인 폴더 이름은 반드시 `redmine_gitlab_adapter` 여야 합니다.
+    또는
+    ```
+    git clone https://github.com/DongJoonHan/redmine_gitlab_adapter.git
+    ```
 
-2.  `gitlab` gem을 설치합니다.
+3.  `gitlab` gem을 설치합니다.
 
     예: `bundle install`
 
-3.  Redmine을 (재)시작합니다.
+4.  Redmine을 (재)시작합니다.
 
 ### 설정
 
