@@ -4,16 +4,29 @@ This repository is a fork of the original project and has been modified to suppo
 
 For Redmine 6.0.x.
 
-### Plugin installation
+### Quick install (copy/paste)
 
-1.  Copy the plugin directory into the $REDMINE_ROOT/plugins directory. Please
-    note that plugin's folder name should be "redmine_gitlab_adapter".
+Use one of the refs below:
+- tag: `v0.3.0`
+- branch: `main` or `feature/github-adapter`
+- commit: full SHA
 
-2.  Install 'gitlab'
+```bash
+# Set target ref (tag / branch / commit SHA)
+REF="v0.3.0"
 
-    e.g. bundle install
+cd $REDMINE_ROOT/plugins
+git clone https://github.com/DongJoonHan/redmine_gitlab_adapter.git
+cd redmine_gitlab_adapter
+git fetch --all --tags
+git checkout "$REF"
 
-3.  (Re)Start Redmine.
+cd $REDMINE_ROOT
+bundle install
+bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+```
+
+Then restart Redmine.
 
 ### Settings
 
