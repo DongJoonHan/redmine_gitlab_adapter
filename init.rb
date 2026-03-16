@@ -3,11 +3,11 @@ require_relative 'lib/gitlab_repositories_helper_patch'
 
 Redmine::Plugin.register :redmine_gitlab_adapter do
   name 'Redmine Gitlab Adapter plugin'
-  author 'Future Corporation'
+  author 'Future Corporation, Synetics Co., Ltd.'
   description 'This is a Gitlab Adapter plugin for Redmine'
   version '0.3.0'
-  url 'https://www.future.co.jp'
-  author_url 'https://www.future.co.jp'
+  url 'https://www.synetics.kr'
+  author_url 'https://www.synetics.kr'
   Redmine::Scm::Base.add "Gitlab"
 end
 
